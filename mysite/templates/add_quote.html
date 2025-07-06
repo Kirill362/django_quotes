@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавить новую цитату</title>
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Добавить новую цитату</h1>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="id_text">Текст цитаты:</label>
+                {{ form.text }}
+                {% if form.text.errors %}
+                    <div class="error">{{ form.text.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="id_source">Источник:</label>
+                {{ form.source }}
+                {% if form.source.errors %}
+                    <div class="error">{{ form.source.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="id_weight">Вес (>1):</label>
+                {{ form.weight }}
+                {% if form.weight.errors %}
+                    <div class="error">{{ form.weight.errors }}</div>
+                {% endif %}
+            </div>
+
+            <button type="submit">Добавить цитату</button>
+        </form>
+
+        <p><a href="/">Случайная цитата</a></p>
+    </div>
+</body>
+</html>
